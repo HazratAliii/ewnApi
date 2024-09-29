@@ -6,6 +6,8 @@ import nodemailer from "nodemailer";
 import crypto from "crypto";
 import { LoginUserDto } from "../dtos/LoginUserDto";
 import jwt from "jsonwebtoken";
+import passport from "passport";
+import { Strategy as GoogleStrategy } from "passport-google-oauth20";
 
 export const signup = async (
   req: Request<{}, {}, CreateUserDto>,
@@ -133,4 +135,83 @@ export const signin = async (
   } catch (err) {
     return res.status(500).json({ message: "Server error", error: err });
   }
+};
+
+passport.use(
+  new GoogleStrategy(
+    {
+      // clientID: process.env.GOOGLE_CLIENT_ID as string,
+      clientID:
+        "25575199037-sahspmmgemqdt93lgblf224t1ki14un0.apps.googleusercontent.com",
+      clientSecret: "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",
+      callbackURL: "http://localhost:5000/api/v1/auth/google/callback", // This URL should match the one you set in the Google Developers Console
+      scope: ["profile", "email"],
+    },
+    async (accessToken, refreshToken, profile, done) => {
+      try {
+        const existingUser = await User.findOne({
+          email: profile.emails?.[0].value,
+        });
+
+        if (existingUser) {
+          return done(null, existingUser);
+        }
+
+        const newUser = new User({
+          email: profile.emails?.[0].value,
+          givenName: profile.name?.givenName,
+          familyName: profile.name?.familyName,
+          googleId: profile.id,
+          verified: true,
+        });
+
+        await newUser.save();
+        return done(null, newUser);
+      } catch (err) {
+        // @ts-ignore
+        return done(err, null);
+      }
+    }
+  )
+);
+
+// Serialize and deserialize user (for maintaining sessions)
+passport.serializeUser((user: any, done) => {
+  done(null, user.id);
+});
+
+passport.deserializeUser(async (id, done) => {
+  try {
+    const user = await User.findById(id);
+    done(null, user);
+  } catch (err) {
+    done(err, null);
+  }
+});
+
+export const googleAuth = (req: Request, res: Response) => {
+  const user = req.user as any; // The user is added to req.user by Passport
+
+  // Generate JWT token
+  const token = jwt.sign(
+    { userId: user._id, email: user.email },
+    process.env.JWT_SECRET as string,
+    { expiresIn: "5h" }
+  );
+
+  // Set token as cookie
+  res.cookie("token", token, {
+    httpOnly: true,
+    sameSite: "none",
+    secure: true,
+    path: "/",
+    maxAge: 5 * 60 * 60 * 1000, // 5 hours
+  });
+
+  // Redirect or send success response
+  // res.redirect("http://localhost:3000");
+  return res.status(200).json({
+    message: "Login successful",
+    token,
+  });
 };
