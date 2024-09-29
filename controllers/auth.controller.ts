@@ -176,7 +176,6 @@ passport.use(
   )
 );
 
-// Serialize and deserialize user (for maintaining sessions)
 passport.serializeUser((user: any, done) => {
   done(null, user.id);
 });
@@ -191,9 +190,8 @@ passport.deserializeUser(async (id, done) => {
 });
 
 export const googleAuth = (req: Request, res: Response) => {
-  const user = req.user as any; // The user is added to req.user by Passport
+  const user = req.user as any;
 
-  // Generate JWT token
   const token = jwt.sign(
     { userId: user._id, email: user.email },
     process.env.JWT_SECRET as string,
@@ -206,14 +204,24 @@ export const googleAuth = (req: Request, res: Response) => {
     sameSite: "none",
     secure: true,
     path: "/",
-    maxAge: 5 * 60 * 60 * 1000, // 5 hours
+    maxAge: 5 * 60 * 60 * 1000,
   });
-
-  // Redirect or send success response
-  // res.redirect("http://localhost:3000);
   res.redirect(`http://localhost:3000?token=${token}`);
-  // return res.status(200).json({
-  //   message: "Login successful",
-  //   token,
-  // });
+};
+
+export const logout = (req: Request, res: Response) => {
+  try {
+    res.clearCookie("token", {
+      httpOnly: true,
+      sameSite: "none",
+      secure: true,
+      path: "/",
+    });
+
+    return res.status(200).json({
+      message: "Logout successful",
+    });
+  } catch (err) {
+    return res.status(500).json({ message: "Server error", error: err });
+  }
 };

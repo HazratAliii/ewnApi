@@ -4,6 +4,7 @@ import {
   verifyEmail,
   signin,
   googleAuth,
+  logout,
 } from "../controllers/auth.controller";
 import passport from "passport";
 
@@ -17,5 +18,6 @@ router.get(
   passport.authenticate("google", { failureRedirect: "/signin" }),
   googleAuth as any
 );
+router.post("/logout", logout as any);
 
 export default router;
