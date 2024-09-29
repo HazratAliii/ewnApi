@@ -27,7 +27,7 @@ app.use(
     resave: false,
     saveUninitialized: false,
     cookie: {
-      secure: false, // Use 'true' in production (requires HTTPS)
+      secure: true, // Use 'true' in production (requires HTTPS)
       maxAge: 24 * 60 * 60 * 1000,
     },
   })
