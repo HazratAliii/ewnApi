@@ -2,6 +2,7 @@ import express, { Request, Response } from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import cors from "cors";
+import session from "express-session";
 import authRoutes from "./routes/auth.routes";
 import userRoutes from "./routes/users.routes";
 
@@ -17,6 +18,18 @@ app.use(
   cors({
     origin: "http://localhost:3000",
     credentials: true,
+  })
+);
+
+app.use(
+  session({
+    secret: "sdlfksldfjlkjflsjdflksjad",
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      secure: false, // Use 'true' in production (requires HTTPS)
+      maxAge: 24 * 60 * 60 * 1000,
+    },
   })
 );
 app.use("/api/v1/auth", authRoutes);

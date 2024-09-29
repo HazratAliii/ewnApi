@@ -107,6 +107,7 @@ export const signin = async (
 
     const isPasswordValid = await bcrypt.compare(
       password as string,
+      // @ts-ignore
       user.password
     );
 
@@ -140,11 +141,10 @@ export const signin = async (
 passport.use(
   new GoogleStrategy(
     {
-      // clientID: process.env.GOOGLE_CLIENT_ID as string,
       clientID:
         "25575199037-sahspmmgemqdt93lgblf224t1ki14un0.apps.googleusercontent.com",
       clientSecret: "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",
-      callbackURL: "http://localhost:5000/api/v1/auth/google/callback", // This URL should match the one you set in the Google Developers Console
+      callbackURL: "http://localhost:5000/api/v1/auth/google/callback",
       scope: ["profile", "email"],
     },
     async (accessToken, refreshToken, profile, done) => {
@@ -163,6 +163,7 @@ passport.use(
           familyName: profile.name?.familyName,
           googleId: profile.id,
           verified: true,
+          image: profile.photos?.[0].value,
         });
 
         await newUser.save();
@@ -209,9 +210,10 @@ export const googleAuth = (req: Request, res: Response) => {
   });
 
   // Redirect or send success response
-  // res.redirect("http://localhost:3000");
-  return res.status(200).json({
-    message: "Login successful",
-    token,
-  });
+  // res.redirect("http://localhost:3000);
+  res.redirect(`http://localhost:3000?token=${token}`);
+  // return res.status(200).json({
+  //   message: "Login successful",
+  //   token,
+  // });
 };
