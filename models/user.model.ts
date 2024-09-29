@@ -29,6 +29,10 @@ const userSchema = new Schema(
     googleId: {
       type: String,
     },
+    image: {
+      type: String,
+      default: "",
+    },
     verificationToken: { type: String },
     tokenExpiration: { type: Date },
   },

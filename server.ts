@@ -1,7 +1,9 @@
 import express, { Request, Response } from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
+import cors from "cors";
 import authRoutes from "./routes/auth.routes";
+import userRoutes from "./routes/users.routes";
 
 dotenv.config();
 const app = express();
@@ -11,7 +13,14 @@ app.get("/", (req: Request, res: Response) => {
 });
 
 app.use(express.json());
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+    credentials: true,
+  })
+);
 app.use("/api/v1/auth", authRoutes);
+app.use("/api/v1/users", userRoutes);
 
 mongoose
   .connect(process.env.MONGODB_URI as string)
