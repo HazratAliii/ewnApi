@@ -206,7 +206,7 @@ export const googleAuth = (req: Request, res: Response) => {
     path: "/",
     maxAge: 5 * 60 * 60 * 1000,
   });
-  res.redirect(`https://ewn-api.vercel.app/?token=${token}`);
+  res.redirect(`https://ewnfe.vercel.app?token=${token}`);
 };
 
 export const logout = (req: Request, res: Response) => {
