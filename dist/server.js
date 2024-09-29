@@ -18,7 +18,7 @@ app.get("/", (req, res) => {
 });
 app.use(express_1.default.json());
 app.use((0, cors_1.default)({
-    origin: "http://localhost:3000",
+    origin: "https://ewnfe.vercel.app",
     credentials: true,
 }));
 app.use((0, express_session_1.default)({
@@ -26,7 +26,7 @@ app.use((0, express_session_1.default)({
     resave: false,
     saveUninitialized: false,
     cookie: {
-        secure: false, // Use 'true' in production (requires HTTPS)
+        secure: true, // Use 'true' in production (requires HTTPS)
         maxAge: 24 * 60 * 60 * 1000,
     },
 }));
@@ -35,9 +35,11 @@ app.use("/api/v1/users", users_routes_1.default);
 mongoose_1.default
     .connect(process.env.MONGODB_URI)
     .then(() => {
-    app.listen(port, () => {
-        console.log(`Server running on port ${port}`);
-    });
+    if (process.env.NODE_ENV === "local") {
+        app.listen(port, () => {
+            console.log(`Server running on port ${port}`);
+        });
+    }
 })
     .catch((e) => {
     console.log(e);
