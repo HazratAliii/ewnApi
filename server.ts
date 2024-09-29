@@ -38,9 +38,11 @@ app.use("/api/v1/users", userRoutes);
 mongoose
   .connect(process.env.MONGODB_URI as string)
   .then(() => {
-    app.listen(port, () => {
-      console.log(`Server running on port ${port}`);
-    });
+    if (process.env.NODE_ENV === "local") {
+      app.listen(port, () => {
+        console.log(`Server running on port ${port}`);
+      });
+    }
   })
   .catch((e) => {
     console.log(e);
