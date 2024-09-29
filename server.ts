@@ -16,7 +16,7 @@ app.get("/", (req: Request, res: Response) => {
 app.use(express.json());
 app.use(
   cors({
-    origin: "https://ewnfe.vercel.app/",
+    origin: "https://ewnfe.vercel.app",
     credentials: true,
   })
 );
