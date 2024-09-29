@@ -50,7 +50,7 @@ export const signup = async (
       to: email,
       subject: "Email Verification",
       text: `Please verify your email by clicking on the following link: 
-      http://localhost:${process.env.PORT}/api/v1/auth/verify/${verificationToken}`,
+      https://ewn-api.vercel.app/api/v1/auth/verify/${verificationToken}`,
     };
     await transporter.sendMail(mailOptions as any);
 
@@ -144,7 +144,7 @@ passport.use(
       clientID:
         "25575199037-sahspmmgemqdt93lgblf224t1ki14un0.apps.googleusercontent.com",
       clientSecret: "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",
-      callbackURL: "http://localhost:5000/api/v1/auth/google/callback",
+      callbackURL: "https://ewnfe.vercel.app/api/v1/auth/google/callback",
       scope: ["profile", "email"],
     },
     async (accessToken, refreshToken, profile, done) => {
@@ -206,7 +206,7 @@ export const googleAuth = (req: Request, res: Response) => {
     path: "/",
     maxAge: 5 * 60 * 60 * 1000,
   });
-  res.redirect(`http://localhost:3000?token=${token}`);
+  res.redirect(`https://ewn-api.vercel.app/?token=${token}`);
 };
 
 export const logout = (req: Request, res: Response) => {
