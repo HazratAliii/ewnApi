@@ -8,7 +8,7 @@ const userSchema = new Schema(
     },
     password: {
       type: String,
-      required: true,
+      // required: true,
     },
     givenName: {
       type: String,
@@ -21,6 +21,7 @@ const userSchema = new Schema(
     language: {
       type: String,
       required: true,
+      default: "English",
     },
     verified: {
       type: Boolean,
