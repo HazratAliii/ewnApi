@@ -13,14 +13,13 @@ app.get("/", (req: Request, res: Response) => {
   res.status(200).json({ message: "Up and Running" });
 });
 
-app.use(express.json());
 app.use(
   cors({
     origin: "https://ewnfe.vercel.app",
     credentials: true,
   })
 );
-
+app.use(express.json());
 app.use(
   session({
     secret: "sdlfksldfjlkjflsjdflksjad",
