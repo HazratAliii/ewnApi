@@ -9,7 +9,12 @@ import userRoutes from "./routes/users.routes";
 dotenv.config();
 const app = express();
 const port = process.env.PORT || 8000;
-app.use(cors());
+app.use(
+  cors({
+    origin: "https://ewnfe.vercel.app",
+    credentials: true,
+  })
+);
 app.use(
   session({
     secret: "sdlfksldfjlkjflsjdflksjad",
@@ -25,14 +30,6 @@ app.get("/", (req: Request, res: Response) => {
   res.status(200).json({ message: "Up and Running" });
 });
 
-// app.use(
-//   cors({
-//     origin: "https://ewnfe.vercel.app",
-//     credentials: true,
-//   })
-// );
-
-// app.options("*", cors());
 app.use(express.json());
 
 app.use("/api/v1/auth", authRoutes);
