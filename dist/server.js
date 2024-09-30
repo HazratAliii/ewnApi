@@ -21,10 +21,10 @@ app.use((0, express_session_1.default)({
     secret: "sdlfksldfjlkjflsjdflksjad",
     resave: false,
     saveUninitialized: false,
-    cookie: {
-        secure: true, // Use 'true' in production (requires HTTPS)
-        maxAge: 24 * 60 * 60 * 1000,
-    },
+    // cookie: {
+    //   secure: true, // Use 'true' in production (requires HTTPS)
+    //   maxAge: 24 * 60 * 60 * 1000,
+    // },
 }));
 app.get("/", (req, res) => {
     res.status(200).json({ message: "Up and Running" });

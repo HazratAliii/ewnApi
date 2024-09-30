@@ -20,10 +20,10 @@ app.use(
     secret: "sdlfksldfjlkjflsjdflksjad",
     resave: false,
     saveUninitialized: false,
-    cookie: {
-      secure: true, // Use 'true' in production (requires HTTPS)
-      maxAge: 24 * 60 * 60 * 1000,
-    },
+    // cookie: {
+    //   secure: true, // Use 'true' in production (requires HTTPS)
+    //   maxAge: 24 * 60 * 60 * 1000,
+    // },
   })
 );
 app.get("/", (req: Request, res: Response) => {
