@@ -125,7 +125,7 @@ export const signin = async (
       httpOnly: true,
       sameSite: "none",
       secure: true,
-      domain: ".ewnfe.vercel.app",
+      domain: ".vercel.app",
       path: "/",
       maxAge: 5 * 60 * 60 * 1000,
     });
