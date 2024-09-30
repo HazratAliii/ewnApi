@@ -125,7 +125,7 @@ export const signin = async (
       httpOnly: true,
       sameSite: "lax",
       secure: true,
-      domain: ".vercel.app",
+      domain: ".ewnfe.vercel.app",
       path: "/",
       maxAge: 5 * 60 * 60 * 1000,
     });
@@ -203,7 +203,7 @@ export const googleAuth = (req: Request, res: Response) => {
   res.cookie("token", token, {
     httpOnly: true,
     sameSite: "none",
-    domain: ".vercel.app",
+    domain: ".ewnfe.vercel.app",
     secure: true,
     path: "/",
     maxAge: 5 * 60 * 60 * 1000,
