@@ -13,14 +13,7 @@ const users_routes_1 = __importDefault(require("./routes/users.routes"));
 dotenv_1.default.config();
 const app = (0, express_1.default)();
 const port = process.env.PORT || 8000;
-app.get("/", (req, res) => {
-    res.status(200).json({ message: "Up and Running" });
-});
-app.use(express_1.default.json());
-app.use((0, cors_1.default)({
-    origin: "https://ewnfe.vercel.app",
-    credentials: true,
-}));
+app.use((0, cors_1.default)());
 app.use((0, express_session_1.default)({
     secret: "sdlfksldfjlkjflsjdflksjad",
     resave: false,
@@ -30,6 +23,17 @@ app.use((0, express_session_1.default)({
         maxAge: 24 * 60 * 60 * 1000,
     },
 }));
+app.get("/", (req, res) => {
+    res.status(200).json({ message: "Up and Running" });
+});
+// app.use(
+//   cors({
+//     origin: "https://ewnfe.vercel.app",
+//     credentials: true,
+//   })
+// );
+// app.options("*", cors());
+app.use(express_1.default.json());
 app.use("/api/v1/auth", auth_routes_1.default);
 app.use("/api/v1/users", users_routes_1.default);
 mongoose_1.default
@@ -44,3 +48,4 @@ mongoose_1.default
     .catch((e) => {
     console.log(e);
 });
+exports.default = app;
