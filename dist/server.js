@@ -17,6 +17,7 @@ app.use((0, cors_1.default)({
     origin: "https://ewnfe.vercel.app",
     credentials: true,
 }));
+app.set("trust proxy", 1);
 app.use((0, express_session_1.default)({
     secret: "sdlfksldfjlkjflsjdflksjad",
     resave: false,
