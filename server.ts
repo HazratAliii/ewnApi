@@ -24,13 +24,13 @@ app.get("/", (req: Request, res: Response) => {
   res.status(200).json({ message: "Up and Running" });
 });
 
-app.use(
-  cors({
-    origin: "https://ewnfe.vercel.app",
-    credentials: true,
-  })
-);
-
+// app.use(
+//   cors({
+//     origin: "https://ewnfe.vercel.app",
+//     credentials: true,
+//   })
+// );
+app.use(cors());
 app.options("*", cors());
 app.use(express.json());
 
