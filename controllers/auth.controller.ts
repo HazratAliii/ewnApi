@@ -123,9 +123,9 @@ export const signin = async (
 
     res.cookie("token", token, {
       httpOnly: true,
-      sameSite: "lax",
+      sameSite: "none",
       secure: true,
-      domain: ".ewnfe.vercel.app",
+      domain: "ewnfe.vercel.app",
       path: "/",
       maxAge: 5 * 60 * 60 * 1000,
     });
