@@ -109,7 +109,7 @@ const signin = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             httpOnly: true,
             sameSite: "lax",
             secure: true,
-            domain: "ewnfe.vercel.app",
+            domain: ".ewnfe.vercel.app",
             path: "/",
             maxAge: 5 * 60 * 60 * 1000,
         });
