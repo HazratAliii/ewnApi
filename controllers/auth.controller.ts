@@ -123,7 +123,7 @@ export const signin = async (
 
     res.cookie("token", token, {
       httpOnly: true,
-      sameSite: "lax",
+      sameSite: "none",
       secure: true,
       domain: "ewnfe.vercel.app",
       path: "/",
