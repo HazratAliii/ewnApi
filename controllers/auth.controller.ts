@@ -145,7 +145,7 @@ passport.use(
       clientID:
         "25575199037-sahspmmgemqdt93lgblf224t1ki14un0.apps.googleusercontent.com",
       clientSecret: "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",
-      callbackURL: "https://ewnfe.vercel.app/api/v1/auth/google/callback",
+      callbackURL: "https://ewn-api.vercel.app/api/v1/auth/google/callback",
       scope: ["profile", "email"],
     },
     async (accessToken, refreshToken, profile, done) => {

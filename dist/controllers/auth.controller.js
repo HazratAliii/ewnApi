@@ -126,7 +126,7 @@ exports.signin = signin;
 passport_1.default.use(new passport_google_oauth20_1.Strategy({
     clientID: "25575199037-sahspmmgemqdt93lgblf224t1ki14un0.apps.googleusercontent.com",
     clientSecret: "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",
-    callbackURL: "https://ewnfe.vercel.app/api/v1/auth/google/callback",
+    callbackURL: "https://ewn-api.vercel.app/api/v1/auth/google/callback",
     scope: ["profile", "email"],
 }, (accessToken, refreshToken, profile, done) => __awaiter(void 0, void 0, void 0, function* () {
     var _a, _b, _c, _d, _e;
