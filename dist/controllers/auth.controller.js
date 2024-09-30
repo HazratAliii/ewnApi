@@ -107,7 +107,7 @@ const signin = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         const token = jsonwebtoken_1.default.sign({ userId: user._id, email: user.email }, process.env.JWT_SECRET, { expiresIn: "5h" });
         res.cookie("token", token, {
             httpOnly: true,
-            sameSite: "none",
+            sameSite: "lax",
             secure: true,
             domain: ".ewn.vercel.app",
             path: "/",
