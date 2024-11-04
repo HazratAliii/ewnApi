@@ -7,7 +7,7 @@ import {
   logout,
 } from "../controllers/auth.controller";
 import passport from "passport";
-
+//  Testing
 const router = Router();
 
 router.post("/signup", signup as any);
