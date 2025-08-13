@@ -4,10 +4,10 @@ import jwt from "jsonwebtoken";
 export const authenticateJWT = (
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ) => {
   const token = req.headers.authorization?.split(" ")[1];
-
+  // testing
   if (!token) {
     return res.status(401).json({ message: "Authentication token missing" });
   }
